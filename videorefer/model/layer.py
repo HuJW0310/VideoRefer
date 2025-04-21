@@ -136,7 +136,7 @@ class MaskPooling(nn.Module):
 
         # b, c, h ,w = x.shape
         # b, q, h, w = mask.shape
-        mask = (mask > 0).to(mask.dtype)
+        mask = (mask > 0).to(mask.dtype).to(x.device)
         mask = mask.permute(1,0,2,3)
         denorm = mask.sum(dim=(-1, -2), keepdim=True) + 1e-8
         try:
